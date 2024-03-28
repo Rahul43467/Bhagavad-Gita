@@ -1,4 +1,4 @@
-package com.rkm.bhagavadgita
+package com.rkm.bhagavadgita.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
