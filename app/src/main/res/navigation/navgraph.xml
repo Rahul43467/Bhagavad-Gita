@@ -17,5 +17,14 @@
         android:id="@+id/homefragment"
         android:name="com.rkm.bhagavadgita.view.fragments.homefragment"
         android:label="fragment_homefragment"
-        tools:layout="@layout/fragment_homefragment" />
+        tools:layout="@layout/fragment_homefragment" >
+        <action
+            android:id="@+id/action_homefragment_to_chapterfragment"
+            app:destination="@id/chapterfragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chapterfragment"
+        android:name="com.rkm.bhagavadgita.view.fragments.chapterfragment"
+        android:label="fragment_chapterfragment"
+        tools:layout="@layout/fragment_chapterfragment" />
 </navigation>
