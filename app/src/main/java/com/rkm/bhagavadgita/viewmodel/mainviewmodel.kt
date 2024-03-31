@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.rkm.bhagavadgita.model.allchaptersdataItem
+import com.rkm.bhagavadgita.model.verselistItem
 import com.rkm.bhagavadgita.repositry.apprepositery
 import com.rkm.bhagavadgita.repositry.repo
 import com.rkm.bhagavadgita.room.allchaptersroom
@@ -17,7 +18,7 @@ class mainviewmodel(application: Application):AndroidViewModel(application) {
 
 
 
-    suspend fun getallchaptersv(): List<allchaptersdataItem>{
+    suspend fun getallchaptersv(): ArrayList<verselistItem>{
 
         return apprepositery.getallchaptersdata()
     }

@@ -2,6 +2,7 @@ package com.rkm.bhagavadgita.repositry
 
 
 import com.rkm.bhagavadgita.model.allchaptersdataItem
+import com.rkm.bhagavadgita.model.verselistItem
 import com.rkm.bhagavadgita.utils.retrofitinstance
 
 import java.io.IOException
@@ -9,7 +10,7 @@ import java.io.IOException
 
 class apprepositery {
 
-    suspend fun getallchaptersdata(): List<allchaptersdataItem> {
+    suspend fun getallchaptersdata(): ArrayList<verselistItem> {
 
         val response = try {
             retrofitinstance.api.getchapters()
@@ -18,7 +19,7 @@ class apprepositery {
 
 
         }
-        return response as List<allchaptersdataItem>
+        return response as ArrayList<verselistItem>
 
 
     }

@@ -1,6 +1,6 @@
 package com.rkm.bhagavadgita.model
 
-data class allversedataItem(
+data class verselistItem(
     val chapter_number: Int,
     val commentaries: List<Commentary>,
     val id: Int,

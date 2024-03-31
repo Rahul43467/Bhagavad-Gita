@@ -2,6 +2,7 @@ package com.rkm.bhagavadgita.utils
 
 import com.rkm.bhagavadgita.model.allchaptersdata
 import com.rkm.bhagavadgita.model.allchaptersdataItem
+import com.rkm.bhagavadgita.model.verselistItem
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -17,8 +18,8 @@ interface Apiinterface {
 
 
 
-    @GET("v2/chapters/")
-    suspend fun getchapters(): List<allchaptersdataItem>
+    @GET("v2/chapters/18/verses/")
+    suspend fun getchapters(): ArrayList<verselistItem>
 
 
 

@@ -10,7 +10,11 @@ import com.rkm.bhagavadgita.R
 
 import com.rkm.bhagavadgita.databinding.RcvsingleitemBinding
 import com.rkm.bhagavadgita.model.allchaptersdataItem
+import com.rkm.bhagavadgita.model.verselist
+import com.rkm.bhagavadgita.model.verselistItem
 import com.rkm.bhagavadgita.room.allchaptersroom
+import com.rkm.bhagavadgita.room.verse
+import com.rkm.bhagavadgita.view.fragments.homefragmentDirections
 
 class homeadapter(var list: List<allchaptersroom>, var context: Context): RecyclerView.Adapter<homeadapter.homeViewholder>() {
 
@@ -19,11 +23,13 @@ class homeadapter(var list: List<allchaptersroom>, var context: Context): Recycl
         fun bind(model: allchaptersroom,  context: Context){
 
             binding.name.text = model.name
-            binding.des.text = model.name_meaning
+            binding.des.text = model.verses_count.toString()
 
             binding.root.setOnClickListener {
 
-                move(it)
+                val action = homefragmentDirections.actionHomefragmentToChapterfragment(model.chapter_number)
+
+                findNavController(it).navigate(action)
 
 
             }
@@ -34,11 +40,10 @@ class homeadapter(var list: List<allchaptersroom>, var context: Context): Recycl
 
         }
 
-        private fun move(it: View?) {
-            if (it != null) {
-                findNavController(it).navigate(R.id.action_homefragment_to_chapterfragment)
-            }
-        }
+
+
+
+
 
     }
 

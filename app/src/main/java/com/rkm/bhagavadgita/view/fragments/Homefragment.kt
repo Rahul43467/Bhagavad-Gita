@@ -17,11 +17,17 @@ import androidx.lifecycle.lifecycleScope
 
 import com.rkm.bhagavadgita.adapter.homeadapter
 import com.rkm.bhagavadgita.databinding.FragmentHomefragmentBinding
+import com.rkm.bhagavadgita.model.Commentary
+import com.rkm.bhagavadgita.model.Translation
 import com.rkm.bhagavadgita.model.allchaptersdataItem
+import com.rkm.bhagavadgita.model.verselistItem
+import com.rkm.bhagavadgita.repositry.chapterrepo
 import com.rkm.bhagavadgita.repositry.repo
 import com.rkm.bhagavadgita.room.allchaptersroom
 import com.rkm.bhagavadgita.room.dao
 import com.rkm.bhagavadgita.room.roomdatabase
+import com.rkm.bhagavadgita.room.roomdatabasechapter
+import com.rkm.bhagavadgita.room.verse
 
 import com.rkm.bhagavadgita.viewmodel.mainviewmodel
 
@@ -36,10 +42,11 @@ import kotlinx.coroutines.launch
 class homefragment : Fragment() {
    lateinit var binding: FragmentHomefragmentBinding
     val viewmodel : mainviewmodel by viewModels()
-    lateinit var  repo: repo
+    lateinit var  chapterrepo: chapterrepo
 
-
+    lateinit var chapterlist : List<allchaptersroom>
     lateinit var adapter: homeadapter
+
 
 
 
@@ -52,21 +59,24 @@ class homefragment : Fragment() {
         // Inflate the layout for this fragment
 
         binding = FragmentHomefragmentBinding.inflate(layoutInflater,container,false)
+            val chapterdao = roomdatabasechapter.getdbcopy(requireContext()).chapterdao()
+            chapterrepo = chapterrepo(chapterdao)
 
-            val dao= context?.let { roomdatabase.getdbcopy(it.applicationContext).chapterdao() }
-            repo= dao?.let { repo(it) }!!
 
 
        lifecycleScope.launch {
 
-           repo.readchapter().observe(viewLifecycleOwner,{
 
-               adapter = homeadapter(it,requireContext())
-               binding.homerecyclerview.adapter = adapter
+           chapterlist = chapterrepo.readchapter()
 
 
-           })
+
+
+           adapter = homeadapter(chapterlist,requireContext())
+           binding.homerecyclerview.adapter = adapter
+
        }
+
 
 
 

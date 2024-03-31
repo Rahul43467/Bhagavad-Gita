@@ -1,46 +1,36 @@
 package com.rkm.bhagavadgita.view.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.rkm.bhagavadgita.R
 import com.rkm.bhagavadgita.adapter.chapteradapter
-import com.rkm.bhagavadgita.adapter.homeadapter
 import com.rkm.bhagavadgita.databinding.FragmentChapterfragmentBinding
-import com.rkm.bhagavadgita.databinding.FragmentHomefragmentBinding
-import com.rkm.bhagavadgita.repositry.chapterrepo
+import com.rkm.bhagavadgita.databinding.FragmentDetailBinding
 import com.rkm.bhagavadgita.repositry.repo
-import com.rkm.bhagavadgita.room.allchaptersroom
 import com.rkm.bhagavadgita.room.roomdatabase
-import com.rkm.bhagavadgita.room.roomdatabasechapter
 import com.rkm.bhagavadgita.room.verse
 import com.rkm.bhagavadgita.viewmodel.mainviewmodel
 import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
  * A simple [Fragment] subclass.
- * Use the [chapterfragment.newInstance] factory method to
+ * Use the [detailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class chapterfragment : Fragment() {
+class detailFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    val chapternumberargs by navArgs<chapterfragmentArgs>()
+    val detailnumbers by navArgs<detailFragmentArgs>()
+    lateinit var binding: FragmentDetailBinding
     val viewmodel : mainviewmodel by viewModels()
     lateinit var  repo: repo
-    lateinit var binding : FragmentChapterfragmentBinding
-    lateinit var verselist : List<verse>
+    lateinit var verse : verse
     lateinit var adapter: chapteradapter
-
 
 
     override fun onCreateView(
@@ -48,7 +38,7 @@ class chapterfragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentChapterfragmentBinding.inflate(layoutInflater,container,false)
+        binding = FragmentDetailBinding.inflate(layoutInflater,container,false)
         val dao = roomdatabase.getdbcopy(requireContext()).chapterdao()
         repo = repo(dao)
 
@@ -57,13 +47,23 @@ class chapterfragment : Fragment() {
         lifecycleScope.launch {
 
 
-            verselist = repo.readchapterverse(chapternumberargs.data)
+            verse = repo.readsingleverse(detailnumbers.chapter,detailnumbers.versenumber)
+
+            binding.apply {
+
+                a.text = verse.text
+                b.text = verse.id.toString()
+                c.text = verse.verse_number.toString()
+                d.text = verse.chapter_number.toString()
+                e.text = verse.commentaries[0].description
+                f.text = verse.commentaries[1].description
+                g.text = verse.translations[2].description
+                g.text = verse.translations[0].description
+                g.text = verse.translations[1].description
+            }
 
 
 
-
-            adapter = chapteradapter(verselist,requireContext())
-            binding.chapterrcv.adapter = adapter
 
         }
 

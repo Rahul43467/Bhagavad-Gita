@@ -26,5 +26,24 @@
         android:id="@+id/chapterfragment"
         android:name="com.rkm.bhagavadgita.view.fragments.chapterfragment"
         android:label="fragment_chapterfragment"
-        tools:layout="@layout/fragment_chapterfragment" />
+        tools:layout="@layout/fragment_chapterfragment" >
+        <argument
+            android:name="data"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_chapterfragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.rkm.bhagavadgita.view.fragments.detailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="chapter"
+            app:argType="integer" />
+        <argument
+            android:name="versenumber"
+            app:argType="integer" />
+    </fragment>
 </navigation>
