@@ -11,7 +11,9 @@
         tools:layout="@layout/fragment_splashscreen" >
         <action
             android:id="@+id/action_splashscreen2_to_homefragment"
-            app:destination="@id/homefragment" />
+            app:destination="@id/homefragment"
+            app:popUpTo="@id/splashscreen2"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/homefragment"
@@ -20,7 +22,8 @@
         tools:layout="@layout/fragment_homefragment" >
         <action
             android:id="@+id/action_homefragment_to_chapterfragment"
-            app:destination="@id/chapterfragment" />
+            app:destination="@id/chapterfragment"
+            app:popUpTo="@id/homefragment" />
     </fragment>
     <fragment
         android:id="@+id/chapterfragment"
@@ -29,10 +32,18 @@
         tools:layout="@layout/fragment_chapterfragment" >
         <argument
             android:name="data"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="1" />
         <action
             android:id="@+id/action_chapterfragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment"
+            app:popUpTo="@id/chapterfragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_chapterfragment_to_homefragment"
+            app:destination="@id/homefragment"
+            app:popUpTo="@id/chapterfragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -41,9 +52,16 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="chapter"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="1" />
         <argument
             android:name="versenumber"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="1" />
+        <action
+            android:id="@+id/action_detailFragment_to_chapterfragment"
+            app:destination="@id/chapterfragment"
+            app:popUpTo="@id/detailFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 </navigation>

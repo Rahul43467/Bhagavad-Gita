@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.rkm.bhagavadgita.R
 import com.rkm.bhagavadgita.adapter.chapteradapter
@@ -66,6 +68,17 @@ class detailFragment : Fragment() {
 
 
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,true,{
+
+            if (true){
+
+                findNavController().navigate(R.id.action_detailFragment_to_chapterfragment)
+
+            }else{
+                requireActivity().onBackPressed()
+            }
+        })
 
 
 
